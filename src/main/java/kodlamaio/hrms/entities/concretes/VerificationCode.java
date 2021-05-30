@@ -11,18 +11,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name="jobpositions")
 @Data
+@Table(name="verificationcodes")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobPosition {
+public class VerificationCode {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Id")
 	private int id;
 	
-	@Column(name="Name")
-	private String name;
+	@Column(name="user_id")
+	private int userId;
+	
+	@Column(name="code")
+	private String code;
+	
+	@Column(name="is_verified")
+	private boolean isVerified;
 }
