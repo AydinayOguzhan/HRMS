@@ -1,7 +1,5 @@
 package kodlamaio.hrms.business.concretes;
 
-
-
 import org.springframework.stereotype.Service;
 
 
@@ -10,6 +8,7 @@ import kodlamaio.hrms.business.abstacts.BaseUserService;
 import kodlamaio.hrms.business.abstacts.EmployerService;
 import kodlamaio.hrms.business.abstacts.JobSeekerService;
 import kodlamaio.hrms.business.abstacts.VerificationCodeService;
+import kodlamaio.hrms.business.abstacts.VerifyPersonService;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -27,13 +26,16 @@ public class AuthManager implements AuthService{
 	private JobSeekerService jobSeekerService;
 	private BaseUserService baseUserService;
 	private VerificationCodeService verificationCodeService;
+	private VerifyPersonService verifyPersonService;
 
 	public AuthManager(EmployerService employerService, BaseUserService baseUserService,
-			VerificationCodeService verificationCodeService, JobSeekerService jobSeekerService) {
+			VerificationCodeService verificationCodeService, JobSeekerService jobSeekerService,
+			VerifyPersonService verifyPersonService) {
 		this.employerService = employerService;
 		this.baseUserService = baseUserService;
 		this.verificationCodeService = verificationCodeService;
 		this.jobSeekerService = jobSeekerService;
+		this.verifyPersonService = verifyPersonService;
 	}
 	//------------------------------------------------------------------------------------------------------------
 	@Override
@@ -83,7 +85,12 @@ public class AuthManager implements AuthService{
 			return new ErrorResult("Kullanıcı sistemde mevcut");
 		}
 		
-		//TODO: Mernis doğrulaması ekle
+		var verify = verifyPersonService.verifyPerson(jobSeekerRegisterDto.getNationalityId(), jobSeekerRegisterDto.getFirstName(), 
+				jobSeekerRegisterDto.getLastName(), jobSeekerRegisterDto.getDateOfBirth());
+		
+		if (!verify) {
+			return new ErrorResult("Girilen bilgiler gerçek bir kişiye ait değil");
+		}
 		
 		if (!jobSeekerRegisterDto.getPassword().contains(jobSeekerRegisterDto.getVerifyPassword())) {
 			return new ErrorResult("Girilen şifreler birbirleriyle uyuşmuyor");
