@@ -12,4 +12,5 @@ public interface UserLanguageService {
 	Result delete(UserLanguage userLanguage);
 	
 	DataResult<List<UserLanguage>> getAll();
+	DataResult<List<UserLanguage>> getByUserId(int userId);
 }

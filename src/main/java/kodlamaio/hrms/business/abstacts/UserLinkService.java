@@ -12,4 +12,5 @@ public interface UserLinkService {
 	Result delete(UserLink userLink);
 	
 	DataResult<List<UserLink>> getAll();
+	DataResult<List<UserLink>> getByUserId(int userId);
 }

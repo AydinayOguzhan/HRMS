@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserCoverLetterService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -25,6 +26,11 @@ public class UserCoverLetterManager implements UserCoverLetterService{
 
 	@Override
 	public Result add(UserCoverLetter userCoverLetter) {
+		var result = getByUserId(userCoverLetter.getUserId());
+		if (result.getData() != null) {
+			return new ErrorResult("Sistemde önyazınız bulunmakta");
+		}
+		
 		this.userCoverLetterDao.save(userCoverLetter);
 		return new SuccessResult("Ekleme işlemi başarılı");
 	}
@@ -44,6 +50,11 @@ public class UserCoverLetterManager implements UserCoverLetterService{
 	@Override
 	public DataResult<List<UserCoverLetter>> getAll() {
 		return new SuccessDataResult<List<UserCoverLetter>>(this.userCoverLetterDao.findAll());
+	}
+
+	@Override
+	public DataResult<UserCoverLetter> getByUserId(int userId) {
+		return new SuccessDataResult<UserCoverLetter>(this.userCoverLetterDao.getByUserId(userId));
 	}
 
 }

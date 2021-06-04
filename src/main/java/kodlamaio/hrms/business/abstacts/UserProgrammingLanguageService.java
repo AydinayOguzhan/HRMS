@@ -12,4 +12,5 @@ public interface UserProgrammingLanguageService {
 	Result delete(UserProgrammingLanguage userProgrammingLanguage);
 	
 	DataResult<List<UserProgrammingLanguage>> getAll();
+	DataResult<List<UserProgrammingLanguage>> getByUserId(int userId);
 }

@@ -46,4 +46,9 @@ public class UserProgrammingLanguageManager implements UserProgrammingLanguageSe
 		return new SuccessDataResult<List<UserProgrammingLanguage>>(this.userProgrammingLanguageDao.findAll());
 	}
 
+	@Override
+	public DataResult<List<UserProgrammingLanguage>> getByUserId(int userId) {
+		return new SuccessDataResult<List<UserProgrammingLanguage>>(this.userProgrammingLanguageDao.getByUserId(userId));
+	}
+
 }

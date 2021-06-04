@@ -46,4 +46,9 @@ public class UserLinkManager implements UserLinkService{
 		return new SuccessDataResult<List<UserLink>>(this.userLinkDao.findAll());
 	}
 
+	@Override
+	public DataResult<List<UserLink>> getByUserId(int userId) {
+		return new SuccessDataResult<List<UserLink>>(this.userLinkDao.getByUserId(userId));
+	}
+
 }

@@ -46,4 +46,9 @@ public class UserLanguageManager implements UserLanguageService{
 		return new SuccessDataResult<List<UserLanguage>>(this.userLanguageDao.findAll());
 	}
 
+	@Override
+	public DataResult<List<UserLanguage>> getByUserId(int userId) {
+		return new SuccessDataResult<List<UserLanguage>>(this.userLanguageDao.getByUserId(userId));
+	}
+
 }

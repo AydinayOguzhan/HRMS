@@ -12,4 +12,5 @@ public interface UserCoverLetterService {
 	Result delete(UserCoverLetter userCoverLetter);
 	
 	DataResult<List<UserCoverLetter>> getAll();
+	DataResult<UserCoverLetter> getByUserId(int userId);
 }
