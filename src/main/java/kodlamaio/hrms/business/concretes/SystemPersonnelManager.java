@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.EmployerService;
+import kodlamaio.hrms.business.abstacts.JobAdvertisementService;
 import kodlamaio.hrms.business.abstacts.SystemPersonnelService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -19,10 +20,13 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 
 	private SystemPersonnelDao systemPersonnelDao;
 	private EmployerService employerService;
+	private JobAdvertisementService jobAdvertisementService;
 	
-	public SystemPersonnelManager(SystemPersonnelDao systemPersonnelDao, EmployerService employerService) {
+	public SystemPersonnelManager(SystemPersonnelDao systemPersonnelDao, EmployerService employerService,
+			JobAdvertisementService jobAdvertisementService) {
 		this.systemPersonnelDao = systemPersonnelDao;
 		this.employerService = employerService;
+		this.jobAdvertisementService = jobAdvertisementService;
 	}
 
 	@Override
@@ -43,6 +47,17 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 			return new ErrorResult("Hesap onaylama işlemi başarısız");
 		}
 		return new SuccessResult("Hesap onaylama işlemi başarılı");
+	}
+
+	@Override
+	public Result verifyJobAdvertisements(int id, boolean verified) {
+		var result = jobAdvertisementService.getById(id);
+		result.getData().setApproved(verified);
+		var update = jobAdvertisementService.update(result.getData());
+		if (!update.isSuccess()) {
+			return new ErrorResult("Onaylama işlemi başarısız");
+		}
+		return new SuccessResult("Onaylama işlemi başarılı");
 	}
 
 }

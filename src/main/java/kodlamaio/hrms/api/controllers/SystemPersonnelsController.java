@@ -23,4 +23,9 @@ public class SystemPersonnelsController {
 	public Result Verification(@RequestParam int userId,@RequestParam boolean verified) {
 		return this.systemPersonnelService.verification(userId, verified);
 	}
+	
+	@PostMapping("/verifyjobadvertisement")
+	public Result verifyJobAdvertisement(@RequestParam int id,@RequestParam boolean verified) {
+		return this.systemPersonnelService.verifyJobAdvertisements(id, verified);
+	}
 }

@@ -12,6 +12,7 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
+import kodlamaio.hrms.entities.Dto.JobAdvertisementDetail;
 import kodlamaio.hrms.entities.Dto.JobAdvertisementList;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
@@ -65,8 +66,8 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisementList>> getAllActive() {
-		return new SuccessDataResult<List<JobAdvertisementList>>(this.jobAdvertisementDao.getAllActive());
+	public DataResult<List<JobAdvertisementList>> getAllByIsActiveTrueAndIsApprovedTrue() {
+		return new SuccessDataResult<List<JobAdvertisementList>>(this.jobAdvertisementDao.getByIsActiveTrueAndIsApprovedTrueDetail());
 	}
 
 	@Override
@@ -77,6 +78,26 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	@Override
 	public DataResult<List<JobAdvertisementList>> getAllActiveWithCompanyName(String companyName) {
 		return new SuccessDataResult<List<JobAdvertisementList>>(this.jobAdvertisementDao.getAllActiveWithCompanyName(companyName));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisementDetail>> getByIsActiveTrueAndIsApprovedTrueDetail() {
+		return new SuccessDataResult<List<JobAdvertisementDetail>>(this.jobAdvertisementDao.getByIsActiveTrueAndIsApprovedTrue());
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisementDetail>> getAllDetailByUserId(int userId) {
+		return new SuccessDataResult<List<JobAdvertisementDetail>>(this.jobAdvertisementDao.getAllDetailByUserId(userId));
+	}
+
+	@Override
+	public DataResult<JobAdvertisementDetail> getDetailById(int id) {
+		return new SuccessDataResult<JobAdvertisementDetail>(this.jobAdvertisementDao.getDetailById(id));
+	}
+
+	@Override
+	public DataResult<JobAdvertisement> getById(int id) {
+		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getById(id));
 	}
 
 }

@@ -115,6 +115,20 @@ public class AuthManager implements AuthService{
 	//------------------------------------------------------------------------------------------------------------
 	
 	
+	@Override
+	public Result Login(BaseUser baseUser) {
+		var result = this.baseUserService.getByEmail(baseUser.getEmail());
+		if (result.getData() == null) {
+			return new ErrorResult("Kullanıcı mevcut değil");
+		}
+		else if (!result.getData().getPassword().equals(baseUser.getPassword())) {
+			return new ErrorResult("Şifreniz yanlış");
+		}
+		return new SuccessResult("Giriş başarılı");
+	};
+	
+	//------------------------------------------------------------------------------------------------------------
+	
 	private BaseUser fillUser(String email, String password) {
 		BaseUser baseUser = new BaseUser();
 		baseUser.setEmail(email);
@@ -165,6 +179,7 @@ public class AuthManager implements AuthService{
 			return new ErrorResult();
 		}
 		return new SuccessResult();
-	};
+	}
+
 
 }

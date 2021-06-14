@@ -11,4 +11,5 @@ public interface SystemPersonnelService {
 	Result add(SystemPersonnel systemPersonnel);
 	
 	Result verification(int userId, boolean verified);
+	Result verifyJobAdvertisements(int id, boolean verified);
 }

@@ -54,4 +54,14 @@ public class JobAdvertisement {
 	
 	@Column(name="is_active")
 	private boolean isActive;
+	
+	@Column(name="work_type_id")
+	private int workTypeId;
+	
+	@Column(name="working_time_type_id")
+	private int workingTimeTypeId;
+	
+	@Column(name="is_approved")
+	private boolean isApproved;
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstacts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.entities.Dto.JobAdvertisementDetail;
 import kodlamaio.hrms.entities.Dto.JobAdvertisementList;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 @RestController
 @RequestMapping("/api/jobadvertisements")
+@CrossOrigin
 public class JobAdvertisementsController {
 	private JobAdvertisementService jobAdvertisementService;
 
@@ -47,9 +50,14 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getAll();
 	}
 	
-	@GetMapping("/getallactive")
-	public  DataResult<List<JobAdvertisementList>> getAllActive(){
-		return this.jobAdvertisementService.getAllActive();
+	@GetMapping("/getallbyisactivetrueandisapprovedtrue")
+	public  DataResult<List<JobAdvertisementList>> getAllByIsActiveTrueAndIsApprovedTrue(){
+		return this.jobAdvertisementService.getAllByIsActiveTrueAndIsApprovedTrue();
+	}
+	
+	@GetMapping("/getbyisactivetrueandisapprovedtruedetail")
+	public  DataResult<List<JobAdvertisementDetail>> getByIsActiveTrueAndIsApprovedTrueDetail(){
+		return this.jobAdvertisementService.getByIsActiveTrueAndIsApprovedTrueDetail();
 	}
 	
 	@GetMapping("/getAllActiveWithDeadline")
@@ -60,6 +68,16 @@ public class JobAdvertisementsController {
 	@GetMapping("/getAllActiveWithCompanyName")
 	public  DataResult<List<JobAdvertisementList>> getAllActiveWithCompanyName(@RequestParam String companyName){
 		return this.jobAdvertisementService.getAllActiveWithCompanyName(companyName);
+	}
+	
+	@GetMapping("/getalldetailbyuserid")
+	public  DataResult<List<JobAdvertisementDetail>> getAllDetailByUserId(@RequestParam int userId){
+		return this.jobAdvertisementService.getAllDetailByUserId(userId);
+	}
+	
+	@GetMapping("/getdetailbyid")
+	public  DataResult<JobAdvertisementDetail> getDetailById(@RequestParam int id){
+		return this.jobAdvertisementService.getDetailById(id);
 	}
 	
 	
