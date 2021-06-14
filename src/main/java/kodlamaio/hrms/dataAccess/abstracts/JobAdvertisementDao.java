@@ -64,4 +64,13 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id "
 			+ "Where advertisement.id = :id")
 	JobAdvertisementDetail getDetailById(int id);
+	
+	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
+			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved) "
+			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
+			+ "Inner Join City as city on advertisement.cityId = city.id "
+			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
+			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id ")
+	List<JobAdvertisementDetail> getAllDetail();
 }

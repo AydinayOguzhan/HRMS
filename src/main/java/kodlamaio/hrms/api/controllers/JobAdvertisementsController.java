@@ -80,6 +80,11 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getDetailById(id);
 	}
 	
+	@GetMapping("/getalldetail")
+	public  DataResult<List<JobAdvertisementDetail>> getAllDetail(){
+		return this.jobAdvertisementService.getAllDetail();
+	}
+	
 	
 	@PostMapping("/closeadvertisement")
 	public ResponseEntity<?> CloseAdvertisement(@RequestParam int advertisementId){

@@ -26,4 +26,5 @@ public interface JobAdvertisementService {
 	DataResult<List<JobAdvertisementDetail>> getByIsActiveTrueAndIsApprovedTrueDetail();
 	DataResult<List<JobAdvertisementDetail>> getAllDetailByUserId(int userId);
 	DataResult<JobAdvertisementDetail> getDetailById(int id);
+	DataResult<List<JobAdvertisementDetail>> getAllDetail();
 }

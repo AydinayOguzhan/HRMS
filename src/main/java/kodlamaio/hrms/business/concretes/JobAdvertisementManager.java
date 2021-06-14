@@ -100,4 +100,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getById(id));
 	}
 
+	@Override
+	public DataResult<List<JobAdvertisementDetail>> getAllDetail() {
+		return new SuccessDataResult<List<JobAdvertisementDetail>>(this.jobAdvertisementDao.getAllDetail());
+	}
+
 }
