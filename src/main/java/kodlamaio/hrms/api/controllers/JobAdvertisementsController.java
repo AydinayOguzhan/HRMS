@@ -30,6 +30,18 @@ public class JobAdvertisementsController {
 	}
 	
 
+	//Pageable
+	@GetMapping("/getallbypage")
+	public DataResult<List<JobAdvertisementDetail>> GetAll(@RequestParam int pageNo,@RequestParam int pageSize){
+		return this.jobAdvertisementService.GetAll(pageNo, pageSize);
+	}
+	
+	@GetMapping("/getTotalPages")
+	public  DataResult<Integer> getTotalPages(@RequestParam int pageNo,@RequestParam int pageSize){
+		return this.jobAdvertisementService.getTotalPages(pageNo, pageSize);
+	}
+	
+	
 	@PostMapping("/add")
 	public ResponseEntity<?> add(@RequestBody JobAdvertisement jobAdvertisement){
 		return ResponseEntity.ok(this.jobAdvertisementService.add(jobAdvertisement));

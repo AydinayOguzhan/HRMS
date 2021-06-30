@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobAdvertisementList {
+	private int id;
 	private String companyName;
 	private String positionName;
 	private int numberOfPosition;

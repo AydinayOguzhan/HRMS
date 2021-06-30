@@ -14,6 +14,10 @@ public interface JobAdvertisementService {
 	Result update(JobAdvertisement jobAdvertisement);
 	Result delete(JobAdvertisement jobAdvertisement);
 	
+	//Pagination
+	DataResult<List<JobAdvertisementDetail>> GetAll(int pageNo, int pageSize);
+	DataResult<Integer> getTotalPages(int pageNo, int pageSize);
+	
 	DataResult<List<JobAdvertisement>> getAll();
 	DataResult<JobAdvertisement> getById(int id);
 	

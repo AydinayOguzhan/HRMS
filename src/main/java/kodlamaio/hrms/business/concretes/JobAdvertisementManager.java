@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.JobAdvertisementService;
@@ -104,5 +106,18 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public DataResult<List<JobAdvertisementDetail>> getAllDetail() {
 		return new SuccessDataResult<List<JobAdvertisementDetail>>(this.jobAdvertisementDao.getAllDetail());
 	}
+
+	@Override
+	public DataResult<List<JobAdvertisementDetail>> GetAll(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return new SuccessDataResult<List<JobAdvertisementDetail>>(this.jobAdvertisementDao.getByIsActiveTrueAndIsApprovedTrue(pageable).getContent());
+	}
+
+	@Override
+	public DataResult<Integer> getTotalPages(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return new SuccessDataResult<Integer>(this.jobAdvertisementDao.getByIsActiveTrueAndIsApprovedTrue(pageable).getTotalPages());
+	}
+
 
 }
