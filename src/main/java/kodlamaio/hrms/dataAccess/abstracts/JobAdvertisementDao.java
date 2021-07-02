@@ -26,7 +26,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, "
+			+ "employer.companyName, employer.website, employer.phoneNumber) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
@@ -37,7 +38,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, "
+			+ "employer.companyName, employer.website, employer.phoneNumber) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
@@ -63,7 +65,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, "
+			+ "employer.companyName, employer.website, employer.phoneNumber) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
@@ -74,7 +77,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, "
+			+ "employer.companyName, employer.website, employer.phoneNumber) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
@@ -85,7 +89,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, "
+			+ "employer.companyName, employer.website, employer.phoneNumber) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "

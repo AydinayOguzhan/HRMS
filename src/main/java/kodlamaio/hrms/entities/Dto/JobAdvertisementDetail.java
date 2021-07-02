@@ -25,6 +25,8 @@ public class JobAdvertisementDetail {
 	private String workTypeName;
 	private String workingTimeTypeName;
 	private boolean isApproved;
-	private String companyName;
+	private String companyName;	
+	private String webSite;
+	private String phoneNumber;
 	
 }
