@@ -26,21 +26,23 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
 			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id "
+			+ "Inner Join Employer as employer on advertisement.userId = employer.userId "
 			+ "Where advertisement.isActive = true and advertisement.isApproved = true")
 	List<JobAdvertisementDetail> getByIsActiveTrueAndIsApprovedTrue();
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
 			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id "
+			+ "Inner Join Employer as employer on advertisement.userId = employer.userId "
 			+ "Where advertisement.isActive = true and advertisement.isApproved = true")
 	Page<JobAdvertisementDetail> getByIsActiveTrueAndIsApprovedTrue(Pageable pageable);
 	
@@ -61,30 +63,33 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
 			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id "
+			+ "Inner Join Employer as employer on advertisement.userId = employer.userId "
 			+ "Where advertisement.userId = :userId")
 	List<JobAdvertisementDetail> getAllDetailByUserId(int userId);
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
 			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id "
+			+ "Inner Join Employer as employer on advertisement.userId = employer.userId "
 			+ "Where advertisement.id = :id")
 	JobAdvertisementDetail getDetailById(int id);
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementDetail"
 			+ "(advertisement.id, position.name, city.name, advertisement.userId, advertisement.jobDescription, advertisement.minSalary, advertisement.maxSalary, "
-			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved) "
+			+ "advertisement.numberOfPosition, advertisement.publishDate, advertisement.deadline, advertisement.isActive, workType.type, workingTime.type, advertisement.isApproved, employer.companyName) "
 			+ " From JobAdvertisement as advertisement Inner Join JobPosition as position on advertisement.jobPositionId = position.id "
 			+ "Inner Join City as city on advertisement.cityId = city.id "
 			+ "Inner Join WorkType as workType on advertisement.workTypeId = workType.id "
-			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id ")
+			+ "Inner Join WorkingTimeType as workingTime on advertisement.workingTimeTypeId = workingTime.id "
+			+ "Inner Join Employer as employer on advertisement.userId = employer.userId ")
 	List<JobAdvertisementDetail> getAllDetail();
 }
