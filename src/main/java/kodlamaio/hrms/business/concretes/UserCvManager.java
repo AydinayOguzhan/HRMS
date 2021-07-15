@@ -50,9 +50,11 @@ public class UserCvManager implements UserCvService{
 		var userCoverLetter = userCoverLetterService.getByUserId(userId);
 		var userImage = userImageService.getByUserId(userId);
 		
+
 		UserCvDto userCv = new UserCvDto(userSchools.getData(),userJobExperiences.getData(), userLanguages.getData(),
 				userLinks.getData(), userProgrammingLanguages.getData(), userCoverLetter.getData().getLetter(),
 				userImage.getData().getImageLink());
+		
 		
 		return new SuccessDataResult<UserCvDto>(userCv, "Getirme işlemi başarılı");
 	}

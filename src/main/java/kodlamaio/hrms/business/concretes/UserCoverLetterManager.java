@@ -54,7 +54,14 @@ public class UserCoverLetterManager implements UserCoverLetterService{
 
 	@Override
 	public DataResult<UserCoverLetter> getByUserId(int userId) {
-		return new SuccessDataResult<UserCoverLetter>(this.userCoverLetterDao.getByUserId(userId));
+		var result = this.userCoverLetterDao.getByUserId(userId);
+		if (result == null) {
+			var newResult = new UserCoverLetter();
+			newResult.setUserId(userId);
+			newResult.setLetter("");
+			return new SuccessDataResult<UserCoverLetter>(newResult);
+		}
+		return new SuccessDataResult<UserCoverLetter>(result);
 	}
 
 }

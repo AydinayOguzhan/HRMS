@@ -69,6 +69,12 @@ public class CloudinaryImageAdapter implements ImageService{
 	@Override
 	public DataResult<String> getUserImage(int userId) {
 		var result = userImageService.getByUserId(userId);
+//		if (result.getData().getImageLink() == null) {
+//			result.getData().setImageLink("https://res.cloudinary.com/aydinayoguzhan/image/upload/v1625513991/profile_photos/axircftmoanrj5enme2q.png");
+//			result.getData().setPublicId("axircftmoanrj5enme2q");
+//			result.getData().setUserId(userId);	
+//			return new SuccessDataResult<String>(result.getData().getImageLink(),"Başarılı");
+//		}
 		return new SuccessDataResult<String>(result.getData().getImageLink(),"Başarılı");
 	}
 

@@ -24,7 +24,8 @@ public class UserJobExperienceManager implements UserJobExperienceService{
 
 	@Override
 	public DataResult<List<UserJobExperience>> getAll() {
-		return new SuccessDataResult<List<UserJobExperience>>(this.userJobExperienceDao.findAll());
+		var result = this.userJobExperienceDao.findAll();
+		return new SuccessDataResult<List<UserJobExperience>>(result);
 	}
 
 	@Override
@@ -47,7 +48,8 @@ public class UserJobExperienceManager implements UserJobExperienceService{
 
 	@Override
 	public DataResult<List<UserJobExperience>> getByUserIdOrderByQuitDateDesc(int userId) {
-		return new SuccessDataResult<List<UserJobExperience>>(this.userJobExperienceDao.getByUserIdOrderByQuitDateDesc(userId));
+		var result = this.userJobExperienceDao.getByUserIdOrderByQuitDateDesc(userId);
+		return new SuccessDataResult<List<UserJobExperience>>(result);
 	}
 
 }

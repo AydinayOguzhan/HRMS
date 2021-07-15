@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserImageService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -48,7 +49,15 @@ public class UserImageManager implements UserImageService{
 
 	@Override
 	public DataResult<UserImage> getByUserId(int userId) {
-		return new SuccessDataResult<UserImage>(this.userImageDao.getByUserId(userId));
+		var result = this.userImageDao.getByUserId(userId);
+		if (result == null) {
+			var newResult = new UserImage();
+			newResult.setImageLink("https://res.cloudinary.com/aydinayoguzhan/image/upload/v1625513991/profile_photos/axircftmoanrj5enme2q.png");
+			newResult.setPublicId("axircftmoanrj5enme2q");
+			newResult.setUserId(userId);	
+			return new SuccessDataResult<UserImage>(newResult, "Nulldan gelen fotoğraf");
+		}
+		return new SuccessDataResult<UserImage>(result, "Fotoğraf var");
 	}
 
 }

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstacts.UserLanguageService;
@@ -16,6 +18,7 @@ import kodlamaio.hrms.entities.concretes.UserLanguage;
 
 @RestController
 @RequestMapping("/api/userlanguages")
+@CrossOrigin
 public class UserLanguagesController {
 	private UserLanguageService userLanguageService;
 	
@@ -43,5 +46,10 @@ public class UserLanguagesController {
 	@GetMapping("/getall")
 	public  DataResult<List<UserLanguage>> getAll(){
 		return this.userLanguageService.getAll();
+	}
+	
+	@GetMapping("/getbyuserid")
+	public  DataResult<List<UserLanguage>> getByUserId(@RequestParam int userId){
+		return this.userLanguageService.getByUserId(userId);
 	}
 }
