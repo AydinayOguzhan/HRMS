@@ -24,7 +24,7 @@ public interface JobAdvertisementService {
 	Result closeAdvertisement(int advertisementId);
 	
 	DataResult<List<JobAdvertisementList>> getAllByIsActiveTrueAndIsApprovedTrue();
-	DataResult<List<JobAdvertisementList>> getAllActiveWithDeadline(Date deadline);
+	DataResult<List<JobAdvertisementList>> getAllActiveAndIsApprovedWithDeadline(Date deadline);
 	DataResult<List<JobAdvertisementList>> getAllActiveWithCompanyName(String companyName);
 	
 	DataResult<List<JobAdvertisementDetail>> getByIsActiveTrueAndIsApprovedTrueDetail();

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class JobAdvertisementList {
 	private int id;
 	private String companyName;
-	private String positionName;
+	private String jobPositionName;
 	private int numberOfPosition;
 	private Date publishDate;
 	private Date deadline;

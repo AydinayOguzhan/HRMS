@@ -72,9 +72,9 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getByIsActiveTrueAndIsApprovedTrueDetail();
 	}
 	
-	@GetMapping("/getAllActiveWithDeadline")
-	public  DataResult<List<JobAdvertisementList>> getAllActiveWithDeadline(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date deadline){
-		return this.jobAdvertisementService.getAllActiveWithDeadline(deadline);
+	@GetMapping("/getallactiveandisapprovedwithdeadline")
+	public  DataResult<List<JobAdvertisementList>> getAllActiveAndIsApprovedWithDeadline(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date deadline){
+		return this.jobAdvertisementService.getAllActiveAndIsApprovedWithDeadline(deadline);
 	}
 	
 	@GetMapping("/getAllActiveWithCompanyName")

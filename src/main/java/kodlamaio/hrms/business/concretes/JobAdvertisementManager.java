@@ -73,8 +73,8 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisementList>> getAllActiveWithDeadline(Date deadline) {
-		return new SuccessDataResult<List<JobAdvertisementList>>(this.jobAdvertisementDao.getAllActiveWithDeadline(deadline));
+	public DataResult<List<JobAdvertisementList>> getAllActiveAndIsApprovedWithDeadline(Date deadline) {
+		return new SuccessDataResult<List<JobAdvertisementList>>(this.jobAdvertisementDao.getAllActiveAndIsApprovedWithDeadline(deadline));
 	}
 
 	@Override

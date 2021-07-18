@@ -53,8 +53,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 			+ "(a.id, e.companyName, p.name, a.numberOfPosition, a.publishDate, a.deadline)"
 			+ " From Employer as e Inner Join JobAdvertisement as a on e.userId = a.userId "
 			+ "Inner Join JobPosition as p on a.jobPositionId = p.id "
-			+ "Where a.deadline >= :deadline and a.isActive = true")
-	List<JobAdvertisementList> getAllActiveWithDeadline(Date deadline);
+			+ "Where a.deadline <= :deadline and a.isActive = true and a.isApproved = true")
+	List<JobAdvertisementList> getAllActiveAndIsApprovedWithDeadline(Date deadline);
 	
 	@Query("Select new kodlamaio.hrms.entities.Dto.JobAdvertisementList"
 			+ "(a.id, e.companyName, p.name, a.numberOfPosition, a.publishDate, a.deadline)"

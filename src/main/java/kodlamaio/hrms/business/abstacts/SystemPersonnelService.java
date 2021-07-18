@@ -9,6 +9,10 @@ import kodlamaio.hrms.entities.concretes.SystemPersonnel;
 public interface SystemPersonnelService {
 	DataResult<List<SystemPersonnel>> getAll();
 	Result add(SystemPersonnel systemPersonnel);
+	Result update(SystemPersonnel systemPersonnel);
+	Result delete(SystemPersonnel systemPersonnel);
+	DataResult<SystemPersonnel> getByUserId(int userId);
+	
 	
 	Result verification(int userId, boolean verified);
 	Result verifyJobAdvertisements(int id, boolean verified);

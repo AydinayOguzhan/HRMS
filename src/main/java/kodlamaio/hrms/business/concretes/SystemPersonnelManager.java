@@ -60,4 +60,21 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 		return new SuccessResult("Onaylama işlemi başarılı");
 	}
 
+	@Override
+	public Result update(SystemPersonnel systemPersonnel) {
+		systemPersonnelDao.save(systemPersonnel);
+		return new SuccessResult("Güncelleme işlemi başarılı");
+	}
+
+	@Override
+	public Result delete(SystemPersonnel systemPersonnel) {
+		systemPersonnelDao.delete(systemPersonnel);
+		return new SuccessResult("Silme işlemi başarılı");
+	}
+
+	@Override
+	public DataResult<SystemPersonnel> getByUserId(int userId) {
+		return new SuccessDataResult<SystemPersonnel>(this.systemPersonnelDao.getByUserId(userId));
+	}
+
 }
