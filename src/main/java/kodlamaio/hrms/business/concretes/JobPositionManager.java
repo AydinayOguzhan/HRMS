@@ -49,4 +49,11 @@ public class JobPositionManager implements JobPositionService{
 	}
 
 
+	@Override
+	public Result delete(JobPosition position) {
+		this.jobPositionDao.delete(position);
+		return new SuccessResult("Silme işlemi başarılı");
+	}
+
+
 }
