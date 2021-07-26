@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.BaseUserService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -23,13 +24,13 @@ public class BaseUserManager implements BaseUserService{
 
 	@Override
 	public DataResult<List<BaseUser>> getAll() {
-		return new SuccessDataResult<List<BaseUser>>(baseUserDao.findAll(), "Getirme işlemi başarılı");
+		return new SuccessDataResult<List<BaseUser>>(baseUserDao.findAll());
 	}
 
 	@Override
 	public Result add(BaseUser user) {
 		baseUserDao.save(user);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.WorkingTimeTypeService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -26,19 +27,19 @@ public class WorkingTimeTypeManager implements WorkingTimeTypeService{
 	@Override
 	public Result add(WorkingTimeType workingTimeType) {
 		this.workingTimeTypeDao.save(workingTimeType);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
 	public Result update(WorkingTimeType workingTimeType) {
 		this.workingTimeTypeDao.save(workingTimeType);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(WorkingTimeType workingTimeType) {
 		this.workingTimeTypeDao.delete(workingTimeType);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override

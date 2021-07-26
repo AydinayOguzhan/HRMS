@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserSchoolService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -31,19 +32,19 @@ public class UserSchoolManager implements UserSchoolService{
 	@Override
 	public Result add(UserSchool userSchool) {
 		this.userSchoolDao.save(userSchool);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
 	public Result update(UserSchool userSchool) {
 		this.userSchoolDao.save(userSchool);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(UserSchool userSchool) {
 		this.userSchoolDao.delete(userSchool);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override

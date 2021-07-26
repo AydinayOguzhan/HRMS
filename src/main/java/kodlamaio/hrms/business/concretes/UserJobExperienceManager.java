@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserJobExperienceService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -31,19 +32,19 @@ public class UserJobExperienceManager implements UserJobExperienceService{
 	@Override
 	public Result add(UserJobExperience userJobExperience) {
 		this.userJobExperienceDao.save(userJobExperience);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
 	public Result update(UserJobExperience userJobExperience) {
 		this.userJobExperienceDao.save(userJobExperience);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(UserJobExperience userJobExperience) {
 		this.userJobExperienceDao.delete(userJobExperience);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override

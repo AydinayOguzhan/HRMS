@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserCoverLetterService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -28,23 +29,23 @@ public class UserCoverLetterManager implements UserCoverLetterService{
 	public Result add(UserCoverLetter userCoverLetter) {
 		var result = getByUserId(userCoverLetter.getUserId());
 		if (result.getData() != null) {
-			return new ErrorResult("Sistemde önyazınız bulunmakta");
+			return new ErrorResult(Messages.alreadyHaveCoverLetter);
 		}
 		
 		this.userCoverLetterDao.save(userCoverLetter);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
 	public Result update(UserCoverLetter userCoverLetter) {
 		this.userCoverLetterDao.save(userCoverLetter);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(UserCoverLetter userCoverLetter) {
 		this.userCoverLetterDao.delete(userCoverLetter);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override

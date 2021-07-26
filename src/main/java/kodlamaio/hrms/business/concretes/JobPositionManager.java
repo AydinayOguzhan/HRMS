@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.JobPositionService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -41,10 +42,10 @@ public class JobPositionManager implements JobPositionService{
 	public Result add(JobPosition position) {
 		var result = this.findByNameIsNull(position.getName());
 		if(result.getData() != null) {
-			return new ErrorResult("Pozisyon mevcut");
+			return new ErrorResult(Messages.positionAlreadyExist);
 		}
 		this.jobPositionDao.save(position);
-		return new SuccessResult("Pozisyon sisteme eklendi");			
+		return new SuccessResult(Messages.addingSuccessful);			
 		
 	}
 
@@ -52,7 +53,7 @@ public class JobPositionManager implements JobPositionService{
 	@Override
 	public Result delete(JobPosition position) {
 		this.jobPositionDao.delete(position);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.JobAdvertisementService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -35,7 +36,7 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		jobAdvertisement.setPublishDate(dateNow);
 		
 		jobAdvertisementDao.save(jobAdvertisement);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
@@ -45,13 +46,13 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		jobAdvertisement.setPublishDate(dateNow);
 		
 		jobAdvertisementDao.save(jobAdvertisement);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(JobAdvertisement jobAdvertisement) {
 		jobAdvertisementDao.delete(jobAdvertisement);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		var advertisement = this.jobAdvertisementDao.getById(advertisementId);
 		advertisement.setActive(false);
 		this.update(advertisement);
-		return new SuccessResult("İlan kapatıldı");
+		return new SuccessResult(Messages.adClosedSuccessful);
 	}
 
 	@Override

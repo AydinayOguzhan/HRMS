@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserProgrammingLanguageService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -26,19 +27,19 @@ public class UserProgrammingLanguageManager implements UserProgrammingLanguageSe
 	@Override
 	public Result add(UserProgrammingLanguage userProgrammingLanguage) {
 		this.userProgrammingLanguageDao.save(userProgrammingLanguage);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
 	public Result update(UserProgrammingLanguage userProgrammingLanguage) {
 		this.userProgrammingLanguageDao.save(userProgrammingLanguage);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(UserProgrammingLanguage userProgrammingLanguage) {
 		this.userProgrammingLanguageDao.delete(userProgrammingLanguage);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override

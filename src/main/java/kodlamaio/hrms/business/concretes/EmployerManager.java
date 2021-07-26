@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.EmployerService;
 import kodlamaio.hrms.business.abstacts.VerificationCodeService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -27,19 +28,19 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<List<Employer>> getAll() {
-		return new SuccessDataResult<List<Employer>>(employerDao.findAll(), "Getirme işlemi başarılı");
+		return new SuccessDataResult<List<Employer>>(employerDao.findAll());
 	}
 
 	@Override
 	public Result add(Employer employer) {
 		employerDao.save(employer);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 	
 	@Override
 	public Result update(Employer employer) {
 		this.employerDao.save(employer);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
@@ -53,21 +54,21 @@ public class EmployerManager implements EmployerService{
 		employer.getData().setApproved(verified);
 		var result = this.update(employer.getData());
 		if (!result.isSuccess()) {
-			return new ErrorResult("Hesap onaylama işlemi başarısız");
+			return new ErrorResult(Messages.confirmationUnsuccessful);
 		}
-		return new SuccessResult("Hesap onaylama işlemi başarılı");
+		return new SuccessResult(Messages.confirmationSuccessful);
 	}
 
 	@Override
 	public Result emailVerification(int userId, String code) {
 		var result = verificationCodeService.checkVerificationCode(userId, code);
 		if (!result.isSuccess()) {
-			return new ErrorResult("Onaylama başarısız");
+			return new ErrorResult(Messages.confirmationUnsuccessful);
 		}
 		var employer = getByUserId(userId);
 		employer.getData().setMailVerified(true);
 		this.update(employer.getData());
-		return new SuccessResult("Onaylama işlemi başarılı");
+		return new SuccessResult(Messages.confirmationSuccessful);
 	}
 
 

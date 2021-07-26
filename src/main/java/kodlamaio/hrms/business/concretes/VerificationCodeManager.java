@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.VerificationCodeService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -36,7 +37,7 @@ public class VerificationCodeManager implements VerificationCodeService{
 	@Override
 	public Result add(VerificationCode code) {
 		this.verificationCodeDao.save(code);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
@@ -46,16 +47,16 @@ public class VerificationCodeManager implements VerificationCodeService{
 			if (code.getCode().contains(verificationCode) && !code.isVerified()) {
 				code.setVerified(true);
 				this.update(code);
-				return new SuccessResult("E-posta doğrulaması başarılı");
+				return new SuccessResult(Messages.verificationSuccessful);
 			}
 		}
-		return new ErrorResult("Doğrulama işlemi başarısız. Kod daha önceden kullanılmış olabilir."); 
+		return new ErrorResult(Messages.verificationUnsuccessful); 
 	}
 
 	@Override
 	public Result update(VerificationCode code) {
 		verificationCodeDao.save(code);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class VerificationCodeManager implements VerificationCodeService{
 		String number3 = Integer.toString(random.nextInt(10));
 		String number4 = Integer.toString(random.nextInt(10));
 		String code = number1 + number2 + number3 + number4;
-		return new SuccessDataResult<String>(code,"Oluşturma işlemi başarılı");
+		return new SuccessDataResult<String>(code,Messages.successful);
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class VerificationCodeManager implements VerificationCodeService{
 		var code = this.createVerificationCode();
 		var verificationCode = this.setVerificationCode(code.getData(), userId);
 		this.add(verificationCode.getData());
-		return new SuccessResult("İşlem başarılı. E-mailinizi kontrol ediniz");
+		return new SuccessResult(Messages.successful + ". " + Messages.checkYourEmail);
 	}
 
 	@Override

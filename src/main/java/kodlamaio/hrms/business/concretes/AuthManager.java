@@ -9,6 +9,7 @@ import kodlamaio.hrms.business.abstacts.EmployerService;
 import kodlamaio.hrms.business.abstacts.JobSeekerService;
 import kodlamaio.hrms.business.abstacts.VerificationCodeService;
 import kodlamaio.hrms.business.abstacts.VerifyPersonService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -42,18 +43,18 @@ public class AuthManager implements AuthService{
 	public Result registerEmployer(EmployerRegisterDto employerRegisterDto) {
 		var nullParameters = checkEmployerParametersIfItsNull(employerRegisterDto);
 		if (!nullParameters.isSuccess()) {
-			return new ErrorResult("Lütfen tüm alanları doldurunuz");
+			return new ErrorResult(Messages.fillTheBlanks);
 		}
 		var ifCompanyEmail = checkIfItsCompanyEmail(employerRegisterDto.getCompanyEmail(), employerRegisterDto.getWebsite());
 		if (!ifCompanyEmail.isSuccess()) {
-			return new ErrorResult("Lütfen bir şirket epostası giriniz");
+			return new ErrorResult(Messages.enterCompanyEmail);
 		}
 		var checkUser = checkIfUserExist(employerRegisterDto.getCompanyEmail());
 		if (!checkUser.isSuccess()) {
-			return new ErrorResult("Kullanıcı sistemde mevcut");
+			return new ErrorResult(Messages.userAlreadyInTheSystem);
 		}
 		if (!employerRegisterDto.getPassword().contains(employerRegisterDto.getVerifyPassword())) {
-			return new ErrorResult("Girilen şifreler birbirleriyle uyuşmuyor");
+			return new ErrorResult(Messages.passwordsDontMatch);
 		}
 		
 		
@@ -69,7 +70,7 @@ public class AuthManager implements AuthService{
 		var verificationCode = verificationCodeService.setVerificationCode(code.getData(), user.getData().getId());
 		verificationCodeService.add(verificationCode.getData());
 		
-		return new SuccessResult("Kayıt işlemi başarılı. Lütfen emailinizi kontrol ediniz.");
+		return new SuccessResult(Messages.registrationSuccessful);
 	}
 	//------------------------------------------------------------------------------------------------------------
 	
@@ -77,23 +78,23 @@ public class AuthManager implements AuthService{
 	public Result registerJobSeeker(JobSeekerRegisterDto jobSeekerRegisterDto) {
 		var nullParameters = checkJobSeekerParameterIfItsNull(jobSeekerRegisterDto);
 		if (!nullParameters.isSuccess()) {
-			return new ErrorResult("Lütfen tüm alanları doldurunuz");
+			return new ErrorResult(Messages.fillTheBlanks);
 		}
 		var checkUserMail = checkIfUserExist(jobSeekerRegisterDto.getEmail());
 		var checkUserNationalityId = checkIfUserExistWithNationalityId(jobSeekerRegisterDto.getNationalityId());
 		if (!checkUserMail.isSuccess() || !checkUserNationalityId.isSuccess()) {
-			return new ErrorResult("Kullanıcı sistemde mevcut");
+			return new ErrorResult(Messages.userAlreadyInTheSystem);
 		}
 		
 		var verify = verifyPersonService.verifyPerson(jobSeekerRegisterDto.getNationalityId(), jobSeekerRegisterDto.getFirstName(), 
 				jobSeekerRegisterDto.getLastName(), jobSeekerRegisterDto.getDateOfBirth());
 		
 		if (!verify) {
-			return new ErrorResult("Girilen bilgiler gerçek bir kişiye ait değil");
+			return new ErrorResult(Messages.notAValidPerson);
 		}
 		
 		if (!jobSeekerRegisterDto.getPassword().contains(jobSeekerRegisterDto.getVerifyPassword())) {
-			return new ErrorResult("Girilen şifreler birbirleriyle uyuşmuyor");
+			return new ErrorResult(Messages.passwordsDontMatch);
 		}
 		
 		var baseUser = fillUser(jobSeekerRegisterDto.getEmail(), jobSeekerRegisterDto.getPassword());
@@ -109,7 +110,7 @@ public class AuthManager implements AuthService{
 		var verificationCode = verificationCodeService.setVerificationCode(code.getData(), user.getData().getId());
 		verificationCodeService.add(verificationCode.getData());
 		
-		return new SuccessResult("Kayıt işlemi başarılı. Lütfen emailinizi kontrol ediniz.");
+		return new SuccessResult(Messages.registrationSuccessful);
 	}
 	
 	//------------------------------------------------------------------------------------------------------------
@@ -119,12 +120,12 @@ public class AuthManager implements AuthService{
 	public Result Login(BaseUser baseUser) {
 		var result = this.baseUserService.getByEmail(baseUser.getEmail());
 		if (result.getData() == null) {
-			return new ErrorResult("Kullanıcı mevcut değil");
+			return new ErrorResult(Messages.userDoesntExist);
 		}
 		else if (!result.getData().getPassword().equals(baseUser.getPassword())) {
-			return new ErrorResult("Şifreniz yanlış");
+			return new ErrorResult(Messages.wrongPassword);
 		}
-		return new SuccessResult("Giriş başarılı");
+		return new SuccessResult(Messages.loginSuccessful);
 	};
 	
 	//------------------------------------------------------------------------------------------------------------

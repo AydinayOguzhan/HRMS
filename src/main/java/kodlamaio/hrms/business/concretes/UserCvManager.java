@@ -11,6 +11,7 @@ import kodlamaio.hrms.business.abstacts.UserLanguageService;
 import kodlamaio.hrms.business.abstacts.UserLinkService;
 import kodlamaio.hrms.business.abstacts.UserProgrammingLanguageService;
 import kodlamaio.hrms.business.abstacts.UserSchoolService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.entities.Dto.UserCvDto;
@@ -56,7 +57,7 @@ public class UserCvManager implements UserCvService{
 				userImage.getData().getImageLink());
 		
 		
-		return new SuccessDataResult<UserCvDto>(userCv, "Getirme işlemi başarılı");
+		return new SuccessDataResult<UserCvDto>(userCv, Messages.successful);
 	}
 
 }

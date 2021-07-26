@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.UserImageService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -27,19 +28,19 @@ public class UserImageManager implements UserImageService{
 	@Override
 	public Result add(UserImage userImage) {
 		this.userImageDao.save(userImage);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
 	public Result update(UserImage userImage) {
 		this.userImageDao.save(userImage);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 	@Override
 	public Result delete(UserImage userImage) {
 		this.userImageDao.delete(userImage);
-		return new SuccessResult("Silme işlemi başarılı");
+		return new SuccessResult(Messages.deleteSuccessful);
 	}
 
 	@Override
@@ -52,12 +53,12 @@ public class UserImageManager implements UserImageService{
 		var result = this.userImageDao.getByUserId(userId);
 		if (result == null) {
 			var newResult = new UserImage();
-			newResult.setImageLink("https://res.cloudinary.com/aydinayoguzhan/image/upload/v1625513991/profile_photos/axircftmoanrj5enme2q.png");
-			newResult.setPublicId("axircftmoanrj5enme2q");
+			newResult.setImageLink(Messages.defaultImageLink);
+			newResult.setPublicId(Messages.defaultImage);
 			newResult.setUserId(userId);	
-			return new SuccessDataResult<UserImage>(newResult, "Nulldan gelen fotoğraf");
+			return new SuccessDataResult<UserImage>(newResult);
 		}
-		return new SuccessDataResult<UserImage>(result, "Fotoğraf var");
+		return new SuccessDataResult<UserImage>(result);
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.JobSeekerService;
 import kodlamaio.hrms.business.abstacts.VerificationCodeService;
+import kodlamaio.hrms.business.constants.Messages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -27,13 +28,13 @@ public class JobSeekerManager implements JobSeekerService{
 
 	@Override
 	public DataResult<List<JobSeeker>> getAll() {
-		return new SuccessDataResult<List<JobSeeker>>(jobSeekerDao.findAll(), "Getirme işlemi başarılı");
+		return new SuccessDataResult<List<JobSeeker>>(jobSeekerDao.findAll());
 	}
 
 	@Override
 	public Result add(JobSeeker jobSeeker) {
 		jobSeekerDao.save(jobSeeker);
-		return new SuccessResult("Ekleme işlemi başarılı");
+		return new SuccessResult(Messages.addingSuccessful);
 	}
 
 	@Override
@@ -45,12 +46,12 @@ public class JobSeekerManager implements JobSeekerService{
 	public Result emailVerification(int userId, String code) {
 		var result = verificationCodeService.checkVerificationCode(userId, code);
 		if (!result.isSuccess()) {
-			return new ErrorResult("Onaylama başarısız");
+			return new ErrorResult(Messages.confirmationUnsuccessful);
 		}
 		var jobSeeker = getByUserId(userId);
 		jobSeeker.getData().setVerified(true);
 		this.update(jobSeeker.getData());
-		return new SuccessResult("Onaylama işlemi başarılı");
+		return new SuccessResult(Messages.confirmationSuccessful);
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class JobSeekerManager implements JobSeekerService{
 	@Override
 	public Result update(JobSeeker jobSeeker) {
 		this.jobSeekerDao.save(jobSeeker);
-		return new SuccessResult("Güncelleme işlemi başarılı");
+		return new SuccessResult(Messages.updateSuccessful);
 	}
 
 }
