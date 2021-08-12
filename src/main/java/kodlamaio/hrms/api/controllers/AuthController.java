@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstacts.AuthService;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.Dto.EmployerRegisterDto;
+import kodlamaio.hrms.entities.Dto.HrmsRegisterDto;
 import kodlamaio.hrms.entities.Dto.JobSeekerRegisterDto;
 import kodlamaio.hrms.entities.concretes.BaseUser;
 
@@ -32,6 +33,11 @@ public class AuthController {
 	@PostMapping("/registerjobseeker")
 	public Result RegisterJobSeeker(@RequestBody JobSeekerRegisterDto jobSeekerRegisterDto) {
 		return this.authService.registerJobSeeker(jobSeekerRegisterDto);
+	}
+	
+	@PostMapping("/registersystempersonnel")
+	public Result RegisterSystemPersonnel(@RequestBody HrmsRegisterDto hrmsRegisterDto) {
+		return this.authService.registerHrmsPersonnel(hrmsRegisterDto);
 	}
 	
 	@PostMapping("/login")

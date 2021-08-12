@@ -7,6 +7,7 @@ import kodlamaio.hrms.business.abstacts.AuthService;
 import kodlamaio.hrms.business.abstacts.BaseUserService;
 import kodlamaio.hrms.business.abstacts.EmployerService;
 import kodlamaio.hrms.business.abstacts.JobSeekerService;
+import kodlamaio.hrms.business.abstacts.SystemPersonnelService;
 import kodlamaio.hrms.business.abstacts.VerificationCodeService;
 import kodlamaio.hrms.business.abstacts.VerifyPersonService;
 import kodlamaio.hrms.business.constants.Messages;
@@ -14,10 +15,12 @@ import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.entities.Dto.EmployerRegisterDto;
+import kodlamaio.hrms.entities.Dto.HrmsRegisterDto;
 import kodlamaio.hrms.entities.Dto.JobSeekerRegisterDto;
 import kodlamaio.hrms.entities.concretes.BaseUser;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
+import kodlamaio.hrms.entities.concretes.SystemPersonnel;
 
 
 @Service
@@ -28,15 +31,17 @@ public class AuthManager implements AuthService{
 	private BaseUserService baseUserService;
 	private VerificationCodeService verificationCodeService;
 	private VerifyPersonService verifyPersonService;
+	private SystemPersonnelService systemPersonnelService;
 
 	public AuthManager(EmployerService employerService, BaseUserService baseUserService,
 			VerificationCodeService verificationCodeService, JobSeekerService jobSeekerService,
-			VerifyPersonService verifyPersonService) {
+			VerifyPersonService verifyPersonService, SystemPersonnelService systemPersonnelService) {
 		this.employerService = employerService;
 		this.baseUserService = baseUserService;
 		this.verificationCodeService = verificationCodeService;
 		this.jobSeekerService = jobSeekerService;
 		this.verifyPersonService = verifyPersonService;
+		this.systemPersonnelService = systemPersonnelService;
 	}
 	//------------------------------------------------------------------------------------------------------------
 	@Override
@@ -63,7 +68,7 @@ public class AuthManager implements AuthService{
 		
 		var user = this.baseUserService.getByEmail(employerRegisterDto.getCompanyEmail());
 		Employer employer = new Employer(user.getData().getId(),employerRegisterDto.getCompanyName(), 
-				employerRegisterDto.getWebsite(), employerRegisterDto.getPhoneNumber(),false,false);
+				employerRegisterDto.getWebsite(), employerRegisterDto.getPhoneNumber(),false,false,false);
 		employerService.add(employer);
 		
 		var code = this.verificationCodeService.createVerificationCode();
@@ -127,6 +132,28 @@ public class AuthManager implements AuthService{
 		}
 		return new SuccessResult(Messages.loginSuccessful);
 	};
+	
+	//------------------------------------------------------------------------------------------------------------
+	
+	@Override
+	public Result registerHrmsPersonnel(HrmsRegisterDto hrmsRegisterDto) {
+		BaseUser baseUser = new BaseUser();
+		baseUser.setEmail(hrmsRegisterDto.getEmail());
+		baseUser.setPassword(hrmsRegisterDto.getPassword());
+		var baseUserResult = baseUserService.add(baseUser);
+		var getUserResult = baseUserService.getByEmail(hrmsRegisterDto.getEmail());
+		
+		SystemPersonnel systemPersonnel = new SystemPersonnel();
+		systemPersonnel.setFirstName(hrmsRegisterDto.getFirstName());
+		systemPersonnel.setLastName(hrmsRegisterDto.getLastName());
+		systemPersonnel.setUserId(getUserResult.getData().getId());
+		var hrmsResult = systemPersonnelService.add(systemPersonnel);
+		
+		if (baseUserResult.isSuccess() && hrmsResult.isSuccess()) {
+			return new SuccessResult(Messages.successful);
+		}
+		return new ErrorResult(Messages.unsuccessful);
+	}
 	
 	//------------------------------------------------------------------------------------------------------------
 	

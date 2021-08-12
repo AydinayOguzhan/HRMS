@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstacts.EmployerService;
+import kodlamaio.hrms.business.abstacts.EmployerUpdateInformationService;
 import kodlamaio.hrms.business.abstacts.JobAdvertisementService;
 import kodlamaio.hrms.business.abstacts.SystemPersonnelService;
 import kodlamaio.hrms.business.constants.Messages;
@@ -76,6 +77,12 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 	@Override
 	public DataResult<SystemPersonnel> getByUserId(int userId) {
 		return new SuccessDataResult<SystemPersonnel>(this.systemPersonnelDao.getByUserId(userId));
+	}
+
+	@Override
+	public Result approveEmployerDataUpdate(int userId) {
+		employerService.approveUpdatedData(userId);
+		return new SuccessResult(Messages.confirmationSuccessful);
 	}
 
 }

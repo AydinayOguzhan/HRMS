@@ -11,6 +11,7 @@ public class Messages {
 	public static String wrongPassword = "Şifre hatalı";
 	public static String loginSuccessful = "Giriş başarılı";
 	public static String successful = "İşlem başarılı";
+	public static String unsuccessful = "İşlem başarısız";
 	public static String addingSuccessful = "Ekleme işlemi başarılı";
 	public static String updateSuccessful = "Güncelleme işlemi başarılı";
 	public static String deleteSuccessful = "Silme işlemi başarılı";
@@ -26,4 +27,5 @@ public class Messages {
 	public static String verificationSuccessful = "Doğrulama işlemi başarılı";
 	public static String verificationUnsuccessful = "Doğrulama işlemi başarısız. Kod daha önceden kullanılmış olabilir";
 	public static String checkYourEmail = "Emailinizi kontrol ediniz";
+	public static String waitForConfirmation = "Lütfen onaylama için bekleyiniz";
 }

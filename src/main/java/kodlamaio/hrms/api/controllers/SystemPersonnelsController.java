@@ -41,7 +41,7 @@ public class SystemPersonnelsController {
 	}
 	
 	@GetMapping("/getbyuserid")
-	public  DataResult<SystemPersonnel> getAll(@RequestParam int userId){
+	public  DataResult<SystemPersonnel> getByUserId(@RequestParam int userId){
 		return this.systemPersonnelService.getByUserId(userId);
 	}
 	
@@ -53,5 +53,10 @@ public class SystemPersonnelsController {
 	@PostMapping("/verifyjobadvertisement")
 	public Result verifyJobAdvertisement(@RequestParam int id,@RequestParam boolean verified) {
 		return this.systemPersonnelService.verifyJobAdvertisements(id, verified);
+	}
+	
+	@PostMapping("/approveemployerdataupdate")
+	public Result approveEmployerDataUpdate(@RequestParam int userId) {
+		return this.systemPersonnelService.approveEmployerDataUpdate(userId);
 	}
 }

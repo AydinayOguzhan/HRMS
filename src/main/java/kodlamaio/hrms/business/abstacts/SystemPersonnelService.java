@@ -16,4 +16,5 @@ public interface SystemPersonnelService {
 	
 	Result verification(int userId, boolean verified);
 	Result verifyJobAdvertisements(int id, boolean verified);
+	Result approveEmployerDataUpdate(int userId);
 }

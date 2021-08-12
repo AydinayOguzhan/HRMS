@@ -10,29 +10,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="employers")
+@Table(name="employer_update_information")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
-public class Employer {
+public class EmployerUpdateInformation {
 
 	@Id
 	@Column(name="userid")
 	private int userId;
 	
-	@Column(name="companyname")
+	@Column(name="company_name")
 	private String companyName;
 	
 	@Column(name="website")
 	private String website;
 	
-	@Column(name="phonenumber")
+	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	@Column(name="isapproved")
+	@Column(name="is_approved")
 	private boolean isApproved;
 	
-	@Column(name="mailverified")
+	@Column(name="mail_verification")
 	private boolean mailVerified;
 	
 	@Column(name="is_updated")

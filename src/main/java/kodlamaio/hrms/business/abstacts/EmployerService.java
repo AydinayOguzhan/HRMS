@@ -14,4 +14,6 @@ public interface EmployerService {
 	DataResult<Employer> getByUserId(int userId);
 	Result verification(int userId, boolean verified);
 	Result emailVerification(int userId, String code);
+	
+	Result approveUpdatedData(int userId);
 }
