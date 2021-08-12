@@ -32,6 +32,11 @@ public class EmployersController {
 		return this.employerService.update(employer);
 	}
 	
+	@PostMapping("/updatepermanently")
+	public Result updatePermanently(@RequestBody Employer employer){
+		return this.employerService.updatePermanently(employer);
+	}
+	
 	@GetMapping("/emailverification")
 	public Result EmailVerification(@RequestParam int userId, @RequestParam String code) {
 		return this.employerService.emailVerification(userId, code);

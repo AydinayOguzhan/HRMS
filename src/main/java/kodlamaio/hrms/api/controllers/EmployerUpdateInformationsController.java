@@ -24,7 +24,12 @@ public class EmployerUpdateInformationsController {
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<EmployerUpdateInformation>> GetAll(){
+	public DataResult<List<EmployerUpdateInformation>> getAll(){
 		return this.employerUpdateInformationService.getAll();
+	}
+	
+	@GetMapping("/getbyuserid")
+	public DataResult<EmployerUpdateInformation> getByUserId(int userId){
+		return this.employerUpdateInformationService.getByUserId(userId);
 	}
 }

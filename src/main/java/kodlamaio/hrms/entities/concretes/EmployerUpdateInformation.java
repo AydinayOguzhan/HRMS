@@ -10,14 +10,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="employer_update_information")
+@Table(name="employer_update_informations")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
 public class EmployerUpdateInformation {
 
 	@Id
-	@Column(name="userid")
+	@Column(name="user_id")
 	private int userId;
 	
 	@Column(name="company_name")

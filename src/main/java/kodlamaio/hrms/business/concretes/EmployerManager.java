@@ -60,6 +60,18 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
+	public Result updatePermanently(Employer employer) {
+		employer.setUpdated(false);
+		var employerUpdateInformation = createNewEmployerUpdateInformationData(employer);
+		employerUpdateInformation.setUpdated(false);
+		
+		employerDao.save(employer);
+		employerUpdateInformationService.update(employerUpdateInformation);
+		return new SuccessResult(Messages.successful);
+	}
+
+	
+	@Override
 	public DataResult<Employer> getByUserId(int userId) {
 		return new SuccessDataResult<Employer>(this.employerDao.getByUserId(userId));
 	}
@@ -125,6 +137,5 @@ public class EmployerManager implements EmployerService{
 		
 		return employer;
 	}
-
 
 }

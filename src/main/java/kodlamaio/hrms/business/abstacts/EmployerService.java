@@ -10,6 +10,7 @@ public interface EmployerService {
 	DataResult<List<Employer>> getAll();
 	Result add(Employer employer);
 	Result update(Employer employer);
+	Result updatePermanently(Employer employer);
 	
 	DataResult<Employer> getByUserId(int userId);
 	Result verification(int userId, boolean verified);
